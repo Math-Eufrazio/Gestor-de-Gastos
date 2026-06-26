@@ -4,6 +4,7 @@ from datetime import datetime
 
 login_salvo = None
 
+
 def relatorio():
     print("\n--- RELATÓRIO ---")
 
@@ -47,10 +48,11 @@ def carregar():
             return json.load(arquivo)
     return []
 
+
 def salvar(lancamentos):
-  
     with open("lancamentos.json", "w", encoding="utf-8") as arquivo:
         json.dump(lancamentos, arquivo, indent=4, ensure_ascii=False)
+
 
 def registrar_lancamento():
     print("\n--=-- REGISTRAR LANÇAMENTO --=--")
@@ -97,13 +99,13 @@ def registrar_lancamento():
     print(f"\n[✓] Lançamento registrado com sucesso!")
     print(f"    {tipo.upper()} | R$ {valor:.2f} | {categoria} | {descricao}\n")
 
-def  extrato():
 
+def extrato():
     print("Extrato")
 
     lancamentos = carregar()
 
-    if len (lancamentos) == 0:
+    if len(lancamentos) == 0:
         print("[!] Nenhum lançamento registrado ainda.\n")
         return
 
@@ -114,6 +116,7 @@ def  extrato():
         print(f"Descrição: {lancamento['descricao']}")
         print(f"Valor:     R$ {lancamento['valor']:.2f}")
         print("-" * 40)
+
 
 def exportar_relatorio():
     print("\n--=-- EXPORTAR RELATÓRIO --=--")
@@ -153,7 +156,8 @@ def exportar_relatorio():
         for categoria, total in categorias.items():
             arquivo.write(f"  {categoria}: R$ {total:.2f}\n")
 
-    print("[✓] Relatório exportado com sucesso em relatorio.txt!\n")        
+    print("[✓] Relatório exportado com sucesso em relatorio.txt!\n")
+
 
 while True:
     print("=-=-=-=-=- Bem vindo ao seu gestor de gastos -=-=-=-=-=-=-=")

@@ -1,0 +1,30 @@
+[
+    {
+        "data": "26/06/2026 20:52",
+        "tipo": "despesa",
+        "valor": 20.0,
+        "categoria": "Alimentação",
+        "descricao": "Lanche no Brothers"
+    },
+    {
+        "data": "26/06/2026 20:53",
+        "tipo": "despesa",
+        "valor": 2000.0,
+        "categoria": "Lazer",
+        "descricao": "Compra de um console de video game antigo"
+    },
+    {
+        "data": "26/06/2026 20:53",
+        "tipo": "receita",
+        "valor": 850.0,
+        "categoria": "salario",
+        "descricao": "Pagamento mês 06"
+    },
+    {
+        "data": "26/06/2026 20:54",
+        "tipo": "receita",
+        "valor": 5500.0,
+        "categoria": "salario",
+        "descricao": "Trigrinho pago cartinha"
+    }
+]

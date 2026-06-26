@@ -1,0 +1,11 @@
+=-=-= RELATÓRIO DE FINANÇAS =-=-=
+Gerado em: 26/06/2026 20:54
+
+Total de receitas:  R$ 6350.00
+Total de despesas:  R$ 2020.00
+Saldo total:        R$ 4330.00
+
+-- Por categoria --
+  Alimentação: R$ 20.00
+  Lazer: R$ 2000.00
+  salario: R$ 6350.00
