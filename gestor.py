@@ -4,6 +4,43 @@ from datetime import datetime
 
 login_salvo = None
 
+def relatorio():
+    print("\n--- RELATÓRIO ---")
+
+    lancamentos = carregar()
+
+    if len(lancamentos) == 0:
+        print("[!] Nenhum lançamento registrado ainda.\n")
+        return
+
+    treceitas = 0
+    tdespesas = 0
+    categorias = {}
+
+    for lancamento in lancamentos:
+        valor = lancamento["valor"]
+        categoria = lancamento["categoria"]
+
+        if lancamento["tipo"] == "receita":
+            treceitas += valor
+        else:
+            tdespesas += valor
+
+        if categoria not in categorias:
+            categorias[categoria] = 0
+        categorias[categoria] += valor
+
+    saldo = treceitas - tdespesas
+
+    print(f"\nTotal de receitas:  R$ {treceitas:.2f}")
+    print(f"Total de despesas:  R$ {tdespesas:.2f}")
+    print(f"Saldo total:        R$ {saldo:.2f}")
+    print("\n-- Por categoria --")
+    for categoria, total in categorias.items():
+        print(f"  {categoria}: R$ {total:.2f}")
+    print()
+
+
 def carregar():
     """Lê o lancamentos.json e retorna a lista. Se não existir, retorna lista vazia."""
     if os.path.exists("lancamentos.json"):
