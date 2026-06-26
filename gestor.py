@@ -42,19 +42,18 @@ def relatorio():
 
 
 def carregar():
-    """Lê o lancamentos.json e retorna a lista. Se não existir, retorna lista vazia."""
     if os.path.exists("lancamentos.json"):
         with open("lancamentos.json", "r", encoding="utf-8") as arquivo:
             return json.load(arquivo)
     return []
 
 def salvar(lancamentos):
-    """Recebe a lista de lançamentos e salva no lancamentos.json."""
+  
     with open("lancamentos.json", "w", encoding="utf-8") as arquivo:
         json.dump(lancamentos, arquivo, indent=4, ensure_ascii=False)
 
 def registrar_lancamento():
-    print("\n--- REGISTRAR LANÇAMENTO ---")
+    print("\n--=-- REGISTRAR LANÇAMENTO --=--")
 
     while True:
         tipo = input("Tipo (receita/despesa): ").strip().lower()
@@ -116,6 +115,46 @@ def  extrato():
         print(f"Valor:     R$ {lancamento['valor']:.2f}")
         print("-" * 40)
 
+def exportar_relatorio():
+    print("\n--=-- EXPORTAR RELATÓRIO --=--")
+
+    lancamentos = carregar()
+
+    if len(lancamentos) == 0:
+        print("[!] Nenhum lançamento para exportar.\n")
+        return
+
+    treceitas = 0
+    tdespesas = 0
+    categorias = {}
+
+    for lancamento in lancamentos:
+        valor = lancamento["valor"]
+        categoria = lancamento["categoria"]
+
+        if lancamento["tipo"] == "receita":
+            treceitas += valor
+        else:
+            tdespesas += valor
+
+        if categoria not in categorias:
+            categorias[categoria] = 0
+        categorias[categoria] += valor
+
+    saldo = treceitas - tdespesas
+
+    with open("relatorio.txt", "w", encoding="utf-8") as arquivo:
+        arquivo.write("=-=-= RELATÓRIO DE FINANÇAS =-=-=\n")
+        arquivo.write(f"Gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M')}\n\n")
+        arquivo.write(f"Total de receitas:  R$ {treceitas:.2f}\n")
+        arquivo.write(f"Total de despesas:  R$ {tdespesas:.2f}\n")
+        arquivo.write(f"Saldo total:        R$ {saldo:.2f}\n")
+        arquivo.write("\n-- Por categoria --\n")
+        for categoria, total in categorias.items():
+            arquivo.write(f"  {categoria}: R$ {total:.2f}\n")
+
+    print("[✓] Relatório exportado com sucesso em relatorio.txt!\n")        
+
 while True:
     print("=-=-=-=-=- Bem vindo ao seu gestor de gastos -=-=-=-=-=-=-=")
     print("\n                    Escolha uma opção\n")
@@ -164,9 +203,9 @@ while True:
     elif opcao_menu == "2":
         extrato()
     elif opcao_menu == "3":
-        print("\n-> Chamando função de Relatório...\n")
+        relatorio()
     elif opcao_menu == "4":
-        print("\n-> Chamando função de Exportar...\n")
+        exportar_relatorio()
     elif opcao_menu == "5":
         print("\nSaindo da sua conta de finanças... Volte sempre!")
         break
