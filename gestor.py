@@ -4,7 +4,6 @@ from datetime import datetime
 
 login_salvo = None
 
-
 def carregar():
     """Lê o lancamentos.json e retorna a lista. Se não existir, retorna lista vazia."""
     if os.path.exists("lancamentos.json"):
@@ -17,9 +16,7 @@ def salvar(lancamentos):
     with open("lancamentos.json", "w", encoding="utf-8") as arquivo:
         json.dump(lancamentos, arquivo, indent=4, ensure_ascii=False)
 
-
 def registrar_lancamento():
-
     print("\n--- REGISTRAR LANÇAMENTO ---")
 
     while True:
@@ -43,7 +40,7 @@ def registrar_lancamento():
         if categoria != "":
             break
         print("[X] A categoria não pode ser vazia.")
-  
+
     while True:
         descricao = input("Descrição (ex: almoço no trabalho): ").strip()
         if descricao != "":
@@ -64,14 +61,23 @@ def registrar_lancamento():
     print(f"\n[✓] Lançamento registrado com sucesso!")
     print(f"    {tipo.upper()} | R$ {valor:.2f} | {categoria} | {descricao}\n")
 
-```
-login_salvo = None
+def  extrato():
 
-def 
+    print("Extrato")
 
+    lancamentos = carregar()
 
+    if len (lancamentos) == 0:
+        print("[!] Nenhum lançamento registrado ainda.\n")
+        return
 
-
+    for lancamento in lancamentos:
+        print(f"\nData:      {lancamento['data']}")
+        print(f"Tipo:      {lancamento['tipo'].upper()}")
+        print(f"Categoria: {lancamento['categoria']}")
+        print(f"Descrição: {lancamento['descricao']}")
+        print(f"Valor:     R$ {lancamento['valor']:.2f}")
+        print("-" * 40)
 
 while True:
     print("=-=-=-=-=- Bem vindo ao seu gestor de gastos -=-=-=-=-=-=-=")
@@ -98,7 +104,7 @@ while True:
             print("[X] O nome não pode ser vazio!")
             login_salvo = None
         else:
-            print("[✓] Usuário '{login_salvo}' cadastrado com sucesso!\n")
+            print(f"[✓] Usuário '{login_salvo}' cadastrado com sucesso!\n")
     elif opcao1 == "3":
         print("Saindo do sistema... Até logo!")
         exit()
@@ -117,9 +123,9 @@ while True:
     opcao_menu = input("Digite sua escolha: ")
 
     if opcao_menu == "1":
-        print("\n-> Chamando função de Registrar...\n")
+        registrar_lancamento()
     elif opcao_menu == "2":
-        print("\n-> Chamando função de Extrato...\n")
+        extrato()
     elif opcao_menu == "3":
         print("\n-> Chamando função de Relatório...\n")
     elif opcao_menu == "4":
@@ -129,5 +135,3 @@ while True:
         break
     else:
         print("\n[X] Opção inválida! Escolha de 1 a 5.\n")
-
-```    
