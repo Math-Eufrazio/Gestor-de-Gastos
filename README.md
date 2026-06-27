@@ -1,4 +1,4 @@
-# 💰 App de Gestor de Gastos
+# 💰 App de Finanças Pessoais
 
 Sistema de gestão financeira que permite cadastrar despesas e ganhos, fazer relatórios, extrato e exportar o extrato para ser usado em outra máquina se necessário.
 
@@ -15,7 +15,7 @@ Sistema de gestão financeira que permite cadastrar despesas e ganhos, fazer rel
 Pré-requisitos: Python 3 instalado, terminal aberto na pasta do projeto.
 
 ```bash
-python gestor.py
+python financas.py
 ```
 
 ---
@@ -58,7 +58,7 @@ python gestor.py
 
 | Arquivo | Descrição |
 |---------|-----------|
-| `gestor.py` | programa principal |
+| `financas.py` | programa principal |
 | `lancamentos.json` | dados gerados pelo programa |
 | `relatorio.txt` | exportado pelo programa |
 | `README.md` | documentação do projeto |
